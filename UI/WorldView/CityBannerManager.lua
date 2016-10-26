@@ -1194,6 +1194,47 @@ function CityBanner.UpdateName( self : CityBanner )
 
 			local iSpaceport = GameInfo.Districts["DISTRICT_SPACEPORT"].Index;
 
+			self.m_Instance.CityCanBuildObelisk:SetHide(true);
+			self.m_Instance.CityCanBuildGranary:SetHide(true);
+			self.m_Instance.CityCanBuildWatermill:SetHide(true);
+
+			self.m_Instance.CityCanBuildDistrictCampus1:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictCampus2:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictCampus3:SetHide(true);
+
+			self.m_Instance.CityCanBuildDistrictTheatre1:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictTheatre21:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictTheatre22:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictTheatre3:SetHide(true);
+
+			self.m_Instance.CityCanBuildDistrictIndustrial1:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictIndustrial2:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictIndustrial3:SetHide(true);
+
+			self.m_Instance.CityCanBuildDistrictCommercial1:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictCommercial2:SetHide(true);
+			self.m_Instance.CityCanBuildDistrictCommercial3:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictAquaduct:SetHide(true);
+			self.m_Instance.CityBuiltDistrictBath:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictNeighborhood:SetHide(true);
+			self.m_Instance.CityBuiltDistrictMbanza:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictCampus:SetHide(true);
+			self.m_Instance.CityBuiltDistrictCommercial:SetHide(true);
+			self.m_Instance.CityBuiltDistrictEncampment:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictTheatre:SetHide(true);
+			self.m_Instance.CityBuiltDistrictAcropolis:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictIndustrial:SetHide(true);
+			self.m_Instance.CityBuiltDistrictHansa:SetHide(true);
+			self.m_Instance.CityBuiltDistrictHarbor:SetHide(true);
+			self.m_Instance.CityBuiltDistrictRoyalNavy:SetHide(true);
+
+			self.m_Instance.CityBuiltDistrictSpaceport:SetHide(true);
+
 			local pCityDistricts:table	= pCity:GetDistricts();
 			if g_smartbanner and self.m_Instance.CityBuiltDistrictAquaduct ~= nil then
 				local buildQueue = pCity:GetBuildQueue();
@@ -1203,18 +1244,12 @@ function CityBanner.UpdateName( self : CityBanner )
 				local hSewer = GameInfo.Buildings["BUILDING_SEWER"].Hash;
 				if (buildQueue:CanProduce( hMonument, true )) then
 					self.m_Instance.CityCanBuildObelisk:SetHide(false);
-				else
-					self.m_Instance.CityCanBuildObelisk:SetHide(true);
 				end
 				if (buildQueue:CanProduce( hGranary, true )) then
 					self.m_Instance.CityCanBuildGranary:SetHide(false);
-				else
-					self.m_Instance.CityCanBuildGranary:SetHide(true);
 				end
 				if (buildQueue:CanProduce( hWatermill, true )) then
 					self.m_Instance.CityCanBuildWatermill:SetHide(false);
-				else
-					self.m_Instance.CityCanBuildWatermill:SetHide(true);
 				end
 				--if (buildQueue:CanProduce( hSewer, true )) then
 				--	self.m_Instance.CityCanBuildSewer:SetHide(false);
@@ -1223,9 +1258,6 @@ function CityBanner.UpdateName( self : CityBanner )
 				local hLibrary = GameInfo.Buildings["BUILDING_LIBRARY"].Hash;
 				local hUniversity = GameInfo.Buildings["BUILDING_UNIVERSITY"].Hash;
 				local hResearchLab = GameInfo.Buildings["BUILDING_RESEARCH_LAB"].Hash;
-				self.m_Instance.CityCanBuildDistrictCampus1:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictCampus2:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictCampus3:SetHide(true);
 				if (buildQueue:CanProduce( hLibrary, true )) then
 					self.m_Instance.CityCanBuildDistrictCampus1:SetHide(false);
 				elseif (buildQueue:CanProduce( hUniversity, true )) then
@@ -1238,10 +1270,6 @@ function CityBanner.UpdateName( self : CityBanner )
 				local hArtMuseum = GameInfo.Buildings["BUILDING_MUSEUM_ART"].Hash;
 				local hArtifactMuseum = GameInfo.Buildings["BUILDING_MUSEUM_ARTIFACT"].Hash;
 				local hBroadcastCenter = GameInfo.Buildings["BUILDING_BROADCAST_CENTER"].Hash;
-				self.m_Instance.CityCanBuildDistrictTheatre1:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictTheatre21:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictTheatre22:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictTheatre3:SetHide(true);
 				if (buildQueue:CanProduce( hAmphitheater, true )) then
 					self.m_Instance.CityCanBuildDistrictTheatre1:SetHide(false);
 				end
@@ -1249,9 +1277,6 @@ function CityBanner.UpdateName( self : CityBanner )
 				local hWorkshop = GameInfo.Buildings["BUILDING_WORKSHOP"].Hash;
 				local hFactory = GameInfo.Buildings["BUILDING_FACTORY"].Hash;
 				local hPowerPlant = GameInfo.Buildings["BUILDING_POWER_PLANT"].Hash;
-				self.m_Instance.CityCanBuildDistrictIndustrial1:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictIndustrial2:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictIndustrial3:SetHide(true);
 				if (buildQueue:CanProduce( hWorkshop, true )) then
 					self.m_Instance.CityCanBuildDistrictIndustrial1:SetHide(false);
 				elseif (buildQueue:CanProduce( hFactory, true )) then
@@ -1263,9 +1288,6 @@ function CityBanner.UpdateName( self : CityBanner )
 				local hMarket = GameInfo.Buildings["BUILDING_MARKET"].Hash;
 				local hBank = GameInfo.Buildings["BUILDING_BANK"].Hash;
 				local hStockExchange = GameInfo.Buildings["BUILDING_STOCK_EXCHANGE"].Hash;
-				self.m_Instance.CityCanBuildDistrictCommercial1:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictCommercial2:SetHide(true);
-				self.m_Instance.CityCanBuildDistrictCommercial3:SetHide(true);
 				if (buildQueue:CanProduce( hMarket, true )) then
 					self.m_Instance.CityCanBuildDistrictCommercial1:SetHide(false);
 				elseif (buildQueue:CanProduce( hBank, true )) then
