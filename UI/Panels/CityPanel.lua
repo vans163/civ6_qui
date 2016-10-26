@@ -856,8 +856,8 @@ function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
 		Controls.PurchaseTileCheck:SetDisabled( true );
 		Controls.ManageCitizensCheck:SetDisabled( true );
 		Controls.ChangeProductionCheck:SetDisabled( true );
-		Controls.ProduceWithFaithCheck:SetDisabled( true );
-		Controls.ProduceWithGoldCheck:SetDisabled( true );
+		--Controls.ProduceWithFaithCheck:SetDisabled( true );
+		--Controls.ProduceWithGoldCheck:SetDisabled( true );
 	end
 
 	if not ContextPtr:IsHidden() then
