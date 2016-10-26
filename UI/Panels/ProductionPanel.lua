@@ -2082,6 +2082,11 @@ end
 --
 --Fix me out of here
 --
+local g_cowboy = true;
+local g_badcowboy = false;
+function OnToggleCowboy() g_cowboy = not g_cowboy; end
+function OnToggleBadCowboy() g_badcowboy = not g_badcowboy; end
+
 function FormCorps2( pInputStruct )
     local plotID = UI.GetCursorPlotID();
 	if (Map.IsPlot(plotID)) then
@@ -2151,14 +2156,18 @@ function OnCityProductionCompleted( playerID:number, cityID:number)
 	if (pCity == nil) then return end;
 
 	--unit_type 33
-	BuildUnit2(pCity, 1462612590);
+	if (g_cowboy) then
+		BuildUnit2(pCity, 1462612590);
+	end
 
-	--CityManager.GetCity(player, id);
-	local unitList	= Units.GetUnitsInPlotLayerID( pCity:GetX(), pCity:GetY(), MapLayers.ANY );
-	--local rUnitList = ReverseTable(unitList);
-	for i, pUnit in ipairs(unitList) do
-		if (pUnit ~= nil and pUnit:GetUnitType() == 33) then
-			--UnitManager.RequestCommand( pUnit, UnitCommandTypes.DELETE );
+	if (g_badcowboy) then
+		--CityManager.GetCity(player, id);
+		local unitList	= Units.GetUnitsInPlotLayerID( pCity:GetX(), pCity:GetY(), MapLayers.ANY );
+		--local rUnitList = ReverseTable(unitList);
+		for i, pUnit in ipairs(unitList) do
+			if (pUnit ~= nil and pUnit:GetUnitType() == 33) then
+				UnitManager.RequestCommand( pUnit, UnitCommandTypes.DELETE );
+			end
 		end
 	end
 	--if unitList[0] == nil then return end;
@@ -2236,6 +2245,9 @@ function Initialize()
 
 	--Events.CityProductionChanged.Add( OnCityProductionChanged );
 	Events.CityProductionCompleted.Add(OnCityProductionCompleted);
+
+	LuaEvents.QUI_Option_ToggleCowboy.Add( OnToggleCowboy );
+	LuaEvents.QUI_Option_ToggleBadCowboy.Add( OnToggleBadCowboy );
 end
 Initialize();
 
