@@ -393,7 +393,7 @@ function Open()
 		-- Sets up proper selection AND the associated lens so it's not stuck "on".
 		UI.PlaySound("Production_Panel_Open");
 		LuaEvents.ProductionPanel_Open()
-		UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
+		--UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
 		Refresh();
 		ContextPtr:SetHide(false);
 		Controls.ProductionListScroll:SetScrollValue(0);
