@@ -542,7 +542,7 @@ function View(data)
 	end
 			
 	-- Some conditions, jump past "pause" and show immediately
-	if m_isShiftDown or UserConfiguration.GetValue("PlotToolTipFollowsMouse") == 0 then
+	if UserConfiguration.GetValue("PlotToolTipFollowsMouse") == 0 then
 		Controls.TooltipMain:SetPauseTime( 0 );
 		Controls.TooltipMain:SetHide(false);
 	else

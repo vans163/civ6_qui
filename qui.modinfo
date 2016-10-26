@@ -21,6 +21,7 @@
 				<File>UI/WorldView/CityBannerManager.lua</File>
 				<File>UI/WorldView/CityBannerManager.xml</File>
 				<File>UI/WorldView/PlotInfo.lua</File>
+				<File>UI/ToolTips/PlotToolTip.lua</File>
 				<File>UI/ActionPanel.lua</File>
 				<File>UI/CitySupport.lua</File>
 				<File>UI/TopPanel.lua</File>
@@ -40,6 +41,7 @@
 		<File>UI/WorldView/CityBannerManager.lua</File>
 		<File>UI/WorldView/CityBannerManager.xml</File>
 		<File>UI/WorldView/PlotInfo.lua</File>
+		<File>UI/ToolTips/PlotToolTip.lua</File>
 		<File>UI/ActionPanel.lua</File>
 		<File>UI/CitySupport.lua</File>
 		<File>UI/TopPanel.lua</File>
