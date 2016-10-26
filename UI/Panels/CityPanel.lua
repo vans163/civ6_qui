@@ -791,7 +791,7 @@ function OnToggleManageCitizens()
 		if not Controls.PurchaseTileCheck:IsChecked() then
 			UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
 		end
-		RecenterCameraOnCity();
+		--RecenterCameraOnCity();
 		UILens.ToggleLayerOn( LensLayers.CITIZEN_MANAGEMENT );
 	else		
 		if not Controls.PurchaseTileCheck:IsChecked() then
