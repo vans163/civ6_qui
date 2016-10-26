@@ -341,7 +341,6 @@ end
 --	eNewMode, new mode the engine has just changed to
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )	
-	
 	-- If this is raised while the city panel is up; selecting to purchase a
 	-- plot or manage citizens will close it.
 	if eNewMode == InterfaceModeTypes.CITY_MANAGEMENT or eNewMode == InterfaceModeTypes.VIEW_MODAL_LENS then
@@ -736,7 +735,7 @@ function PopulateList(data, listMode, listIM)
 					buildingListing.Button:SetDisabled(buildingItem.Disabled);
 					buildingListing.Button:RegisterCallback( Mouse.eLClick, function()
 						BuildBuilding(data.City, buildingItem);
-						Close();
+						--Close();
 					end);
 
 					buildingListing.Button:RegisterCallback( Mouse.eRClick, function()
@@ -894,7 +893,7 @@ function PopulateList(data, listMode, listIM)
 
 				buildingListing.Button:RegisterCallback( Mouse.eLClick, function()
 						PurchaseBuilding(data.City, item);
-						Close();
+						--Close();
 					end);
 				end
 		end
@@ -1052,12 +1051,12 @@ function PopulateList(data, listMode, listIM)
 			if (listMode == LISTMODE.PRODUCTION) then
 				unitListing.TrainUnit:RegisterCallback( Mouse.eLClick, function()
 					BuildUnit(data.City, item);
-					Close();
+					--Close();
 					end);
 			else
 				unitListing.TrainUnit:RegisterCallback( Mouse.eLClick, function()
 					PurchaseUnit(data.City, item);
-					Close();
+					--Close();
 					end);
 			end
 
@@ -2083,29 +2082,120 @@ end
 --
 --Fix me out of here
 --
-function BuildUnit2(city, unitHash)
+function FormCorps2( pInputStruct )
+    local plotID = UI.GetCursorPlotID();
+	if (Map.IsPlot(plotID)) then
+		local plot = Map.GetPlotByIndex(plotID);
+		local unitList	= Units.GetUnitsInPlotLayerID(  plot:GetX(), plot:GetY(), MapLayers.ANY );
+		local pSelectedUnit = UI.GetHeadSelectedUnit();
+
+		local tParameters :table = {};
+		for i, pUnit in ipairs(unitList) do
+			tParameters[UnitCommandTypes.PARAM_UNIT_PLAYER] = pUnit:GetOwner();
+			tParameters[UnitCommandTypes.PARAM_UNIT_ID] = pUnit:GetID();
+			if (UnitManager.CanStartCommand( pSelectedUnit, UnitCommandTypes.FORM_CORPS, tParameters)) then
+				UnitManager.RequestCommand( pSelectedUnit, UnitCommandTypes.FORM_CORPS, tParameters);
+			end
+		end
+	end						
+	return true;
+end
+
+--local localPlayer	= Players[Game.GetLocalPlayer()];
+--if (localPlayer ~= nil) then
+--	local playerTechs	= localPlayer:GetTechs();
+--	local techType = GameInfo.Technologies[resourceTechType];
+--	if (techType ~= nil and not playerTechs:HasTech(techType.Index)) then
+--		table.insert(toolTipItems,"[COLOR:Civ6Red](".. Locale.Lookup("LOC_TOOLTIP_REQUIRES") .. " " .. Locale.Lookup(techType.Name) .. ")[ENDCOLOR]");
+--	end
+--end
+
+function AutoFormCorps(pCity, unitHash)
+end
+
+function BuildUnit2(pCity, unitHash)
 	local tParameters = {}; 
 	tParameters[CityOperationTypes.PARAM_UNIT_TYPE] = unitHash;
 	tParameters[CityOperationTypes.PARAM_INSERT_MODE] = CityOperationTypes.VALUE_EXCLUSIVE;
-	CityManager.RequestOperation(city, CityOperationTypes.BUILD, tParameters);
-    UI.PlaySound("Confirm_Production");
+	CityManager.RequestOperation(pCity, CityOperationTypes.BUILD, tParameters);
 end
---Horseman 1462612590
-function OnCityProductionCompleted( playerID:number, cityID:number)
-	if (playerID == Game.GetLocalPlayer()) then
-		local pPlayer = Players[ playerID ];
-		if (pPlayer ~= nil) then
-			local pCity = pPlayer:GetCities():FindID(cityID);
-			if (pCity ~= nil) then
-				BuildUnit2(pCity, 1462612590);
-			end
+
+function TryFormCorp(pSelectedUnit, unitList)
+	for i, pUnit in ipairs(unitList) do
+		tParameters[UnitCommandTypes.PARAM_UNIT_PLAYER] = pUnit:GetOwner();
+		tParameters[UnitCommandTypes.PARAM_UNIT_ID] = pUnit:GetID();
+		if (UnitManager.CanStartCommand( pSelectedUnit, UnitCommandTypes.FORM_CORPS, tParameters)) then
+			UnitManager.RequestCommand( pSelectedUnit, UnitCommandTypes.FORM_CORPS, tParameters);
+			return true;
 		end
 	end
+	return false;
+end
+
+function ReverseTable(t)
+    local reversedTable = {}
+    local itemCount = #t
+    for k, v in ipairs(t) do
+        reversedTable[itemCount + 1 - k] = v
+    end
+    return reversedTable
+end
+
+function OnCityProductionCompleted( playerID:number, cityID:number)
+	if (playerID ~= Game.GetLocalPlayer()) then return end;
+
+	local pPlayer = Players[ playerID ];
+	if (pPlayer == nil) then return end;
+	
+	local pCity = pPlayer:GetCities():FindID(cityID);
+	if (pCity == nil) then return end;
+
+	--unit_type 33
+	BuildUnit2(pCity, 1462612590);
+
+	--CityManager.GetCity(player, id);
+	local unitList	= Units.GetUnitsInPlotLayerID( pCity:GetX(), pCity:GetY(), MapLayers.ANY );
+	--local rUnitList = ReverseTable(unitList);
+	for i, pUnit in ipairs(unitList) do
+		if (pUnit ~= nil and pUnit:GetUnitType() == 33) then
+			--UnitManager.RequestCommand( pUnit, UnitCommandTypes.DELETE );
+		end
+	end
+	--if unitList[0] == nil then return end;
+	--local pSelectedUnit:table = unitList[0];
+
+	--print(pSelectedUnit);
+	--print("first ttrying form corp "..pSelectedUnit);
+	--while(TryFormCorp(pSelectedUnit, unitList)) do
+	--	print("trying form corp "..pSelectedUnit);
+	--	local unitList	= Units.GetUnitsInPlotLayerID(  pCity:GetX(), pCity:GetY(), MapLayers.ANY );
+	--	if unitList[0] == nil then return end;
+	--	pSelectedUnit = unitList[0];
+	--end
+
+	--for i, pUnit in ipairs(unitList) do
+	--	for i2, pUnit2 in ipairs(unitList) do
+	--		tParameters[UnitCommandTypes.PARAM_UNIT_PLAYER] = pUnit:GetOwner();
+	--		tParameters[UnitCommandTypes.PARAM_UNIT_ID] = pUnit:GetID();
+	--		if (UnitManager.CanStartCommand( pUnit2, UnitCommandTypes.FORM_CORPS, tParameters)) then
+	--			UnitManager.RequestCommand( pUnit2, UnitCommandTypes.FORM_CORPS, tParameters);
+	--		end
+	--	end
+	--end
+	--for key,value in pairs(pCity) do
+	--    print("found member " .. key);
+	--end
+
+	--Horseman 1462612590
+	--AutoFormCorps(pCity, 1462612590);
 end
 --
 --
 --
-
+--print(GameInfo.Technologies[0]);
+--for key,value in pairs(GameInfo.Technologies) do
+--    print("found member " .. key);
+--end
 function Initialize()
 	
 	Controls.PauseCollapseList:Stop();
