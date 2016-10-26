@@ -120,6 +120,15 @@ end
 
 -- ===========================================================================
 function ShowPurchases()
+	local pSelectedCity :table = UI.GetHeadSelectedCity();
+	if pSelectedCity == nil then
+		-- Add error message here
+		return;
+	end
+	ShowPurchases2(pSelectedCity)
+end
+
+function ShowPurchases2(pSelectedCity:table)
 
 	-- Only subset of plots are shown if in district placement bonus mode.
 	local isUsingDistrictPlacementFilter = (UI.GetInterfaceMode() == InterfaceModeTypes.DISTRICT_PLACEMENT);
@@ -135,12 +144,6 @@ function ShowPurchases()
 	if isUsingBuildingPlacementFilter then
 		local buildingHash :number = UI.GetInterfaceModeParameter(CityOperationTypes.PARAM_BUILDING_TYPE);
 		building = GameInfo.Buildings[buildingHash];
-	end
-
-	local pSelectedCity :table = UI.GetHeadSelectedCity();
-	if pSelectedCity == nil then
-		-- Add error message here
-		return;
 	end
 
 	local tParameters :table = {};
@@ -235,13 +238,17 @@ end
 
 -- ===========================================================================
 function ShowCitizens()
-	ShowSwapTiles();
-
-	local pSelectedCity :table = UI.GetHeadSelectedCity();
+	local pSelectedCity:table = UI.GetHeadSelectedCity();
 	if pSelectedCity == nil then
 		-- Add error message here
 		return;
 	end
+
+	ShowCitizens2(pSelectedCity)
+end
+
+function ShowCitizens2(pSelectedCity:table)
+	ShowSwapTiles2(pSelectedCity);
 
 	local tParameters :table = {};
 	tParameters[CityCommandTypes.PARAM_MANAGE_CITIZEN] = UI.GetInterfaceModeParameter(CityCommandTypes.PARAM_MANAGE_CITIZEN);
@@ -299,12 +306,16 @@ end
 
 -- ===========================================================================
 function ShowSwapTiles()
-	local pSelectedCity :table = UI.GetHeadSelectedCity();
+	local pSelectedCity:table = UI.GetHeadSelectedCity();
 	if pSelectedCity == nil then
 		-- Add error message here
 		return;
 	end
 
+	ShowSwapTiles2(pSelectedCity)
+end
+
+function ShowSwapTiles2(pSelectedCity:table)
 	local tParameters :table = {};
 	tParameters[CityCommandTypes.PARAM_SWAP_TILE_OWNER] = UI.GetInterfaceModeParameter(CityCommandTypes.PARAM_SWAP_TILE_OWNER);
 
@@ -849,19 +860,57 @@ function OnPlayerTurnActivated( ePlayer:number, isFirstTimeThisTurn:boolean )
 	end
 end
 
-
-function KeyHandler( key:number )
+local g_ShiftDown = false;
+function KeyHandlerDown( key:number )
+	if (key == Keys.VK_SHIFT) and gShiftDown == false then
+		gShiftDown = true;
+		--ShowCitizens();
+		--ShowPurchases();
+		OnShiftPressed();
+		return true;
+	end
+end
+function KeyHandlerUp( key:number )
 	if key == Keys.VK_TAB then
 		UILens.ClearLayerHexes( LensLayers.MAP_HEX_MASK );	 -- ??TRON debug clear
 		return true;
 	end
+	if (key == Keys.VK_SHIFT) then
+		gShiftDown = false;
+		HideCitizens();
+		HidePurchases();
+		UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);			-- Exit mode		
+		UILens.ToggleLayerOff( LensLayers.CITIZEN_MANAGEMENT );
+		LuaEvents.CityPanel_ProductionClose();
+		return true;
+	end
 	return false;
 end
+
+function OnShiftPressed()
+	local plotId:number = UI.GetCursorPlotID();
+	local plot = Map.GetPlotByIndex(plotId);
+	if (plot == nil) then return end;
+ 	local ownerCity = Cities.GetPlotPurchaseCity(plot);
+ 	if ownerCity ~= nil then
+ 		UI.SelectCity(ownerCity, false);
+		UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
+		UILens.ToggleLayerOn( LensLayers.CITIZEN_MANAGEMENT );
+
+		ShowCitizens2(ownerCity);
+		ShowPurchases2(ownerCity);
+		ShowYieldIcons();
+		LuaEvents.CityPanel_ProductionOpen();
+ 	end
+end
+
 function OnInputHandler( pInputStruct:table )
 	local uiMsg = pInputStruct:GetMessageType();
-	if (uiMsg == KeyEvents.KeyUp) then return KeyHandler( pInputStruct:GetKey() ); end;
+	if (uiMsg == KeyEvents.KeyDown) then return KeyHandlerDown( pInputStruct:GetKey() ); end;
+	if (uiMsg == KeyEvents.KeyUp) then return KeyHandlerUp( pInputStruct:GetKey() ); end;
 	return false;
 end 
+
 
 -- ===========================================================================
 --	
