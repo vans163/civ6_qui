@@ -28,6 +28,7 @@
 				<File>UI/MinimapPanel.lua</File>
 				<File>UI/MinimapPanel.xml</File>
 				<File>UI/WorldViewIconsManager.lua</File>
+				<File>UI/MapPinManager.lua</File>
             </Items>
         </ImportFiles>
     </Components>
@@ -48,5 +49,6 @@
 		<File>UI/MinimapPanel.lua</File>
 		<File>UI/MinimapPanel.xml</File>
 		<File>UI/WorldViewIconsManager.lua</File>
+		<File>UI/MapPinManager.lua</File>
 	</Files>
 </Mod>
