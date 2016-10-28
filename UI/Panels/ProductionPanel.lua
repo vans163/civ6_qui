@@ -66,6 +66,10 @@ local purchFaithUnitList
 local showDisabled :boolean = true;
 local m_recommendedItems:table;
 
+-- QUI Stuff
+local g_eNewMode = nil;
+
+
 --local prodAlreadyStarting :boolean = false;
 
 -- ===========================================================================
@@ -343,6 +347,7 @@ end
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )	
 	-- If this is raised while the city panel is up; selecting to purchase a
 	-- plot or manage citizens will close it.
+	g_eNewMode = eNewMode;
 	if eNewMode == InterfaceModeTypes.CITY_MANAGEMENT or eNewMode == InterfaceModeTypes.VIEW_MODAL_LENS then
 		if not ContextPtr:IsHidden() then
 			--Close();
@@ -650,7 +655,7 @@ function PopulateList(data, listMode, listIM)
 			districtListing.Button:SetDisabled(item.Disabled);
 			districtListing.Button:RegisterCallback( Mouse.eLClick, function()
 				ZoneDistrict(data.City, item);
-				Close();
+				--Close();
 			end);
 
 			districtListing.Button:RegisterCallback( Mouse.eRClick, function()
@@ -811,7 +816,7 @@ function PopulateList(data, listMode, listIM)
 				wonderListing.Button:SetDisabled(item.Disabled);
 				wonderListing.Button:RegisterCallback( Mouse.eLClick, function()
 					BuildBuilding(data.City, item);
-					Close();
+					--Close();
 				end);
 
 				wonderListing.Button:RegisterCallback( Mouse.eRClick, function()
@@ -1322,7 +1327,7 @@ function PopulateList(data, listMode, listIM)
 			projectListing.Button:SetDisabled(item.Disabled);
 			projectListing.Button:RegisterCallback( Mouse.eLClick, function()
 				AdvanceProject(data.City, item);
-				Close();
+				--Close();
 			end);
 
 			projectListing.Button:RegisterCallback( Mouse.eRClick, function()
@@ -1886,7 +1891,10 @@ end
 -- ===========================================================================
 function OnProductionClose()
 	if not ContextPtr:IsHidden() then
-		Close();
+		if g_eNewMode ~= InterfaceModeTypes.DISTRICT_PLACEMENT 
+			and g_eNewMode ~= InterfaceModeTypes.BUILDING_PLACEMENT then
+			Close();
+		end
 	end
 end
 

@@ -829,8 +829,8 @@ end
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )	
 	if eOldMode == InterfaceModeTypes.CITY_MANAGEMENT then
-		if Controls.PurchaseTileCheck:IsChecked()   then Controls.PurchaseTileCheck:SetAndCall( false ); end
-		if Controls.ManageCitizensCheck:IsChecked() then Controls.ManageCitizensCheck:SetAndCall( false ); end
+		--if Controls.PurchaseTileCheck:IsChecked()   then Controls.PurchaseTileCheck:SetAndCall( false ); end
+		--if Controls.ManageCitizensCheck:IsChecked() then Controls.ManageCitizensCheck:SetAndCall( false ); end
 		UI.SetFixedTiltMode( false );
 	end
 	
@@ -852,9 +852,9 @@ function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
 		--EnableIfNotTutorialBlocked("ProduceWithGoldCheck");
 		EnableIfNotTutorialBlocked("ChangeProductionCheck");
 	elseif eNewMode == InterfaceModeTypes.DISTRICT_PLACEMENT then
-		Controls.PurchaseTileCheck:SetDisabled( true );
-		Controls.ManageCitizensCheck:SetDisabled( true );
-		Controls.ChangeProductionCheck:SetDisabled( true );
+		--Controls.PurchaseTileCheck:SetDisabled( true );
+		--Controls.ManageCitizensCheck:SetDisabled( true );
+		--Controls.ChangeProductionCheck:SetDisabled( true );
 		--Controls.ProduceWithFaithCheck:SetDisabled( true );
 		--Controls.ProduceWithGoldCheck:SetDisabled( true );
 	end
@@ -953,9 +953,9 @@ function OnQuiShiftClickDown()
 		UILens.ToggleLayerOn( LensLayers.CITIZEN_MANAGEMENT );
 		UILens.ToggleLayerOn( LensLayers.PURCHASE_PLOT );
 		Refresh();
-		Controls.PurchaseTileCheck:SetCheck( true );
-		Controls.ManageCitizensCheck:SetCheck( true );
-		Controls.ChangeProductionCheck:SetCheck( true );
+		--Controls.PurchaseTileCheck:SetCheck( true );
+		--Controls.ManageCitizensCheck:SetCheck( true );
+		--Controls.ChangeProductionCheck:SetCheck( true );
 		LuaEvents.CityPanel_ProductionOpen();
  	end
 end
