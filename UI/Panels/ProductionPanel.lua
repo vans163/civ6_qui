@@ -345,7 +345,7 @@ function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
 	-- plot or manage citizens will close it.
 	if eNewMode == InterfaceModeTypes.CITY_MANAGEMENT or eNewMode == InterfaceModeTypes.VIEW_MODAL_LENS then
 		if not ContextPtr:IsHidden() then
-			Close();
+			--Close();
 		end
 	end
 end
@@ -370,13 +370,14 @@ end
 --	or an external system call.
 -- ===========================================================================
 function Close()
-	if (Controls.SlideIn:IsStopped()) then			-- Need to check to make sure that we have not already begun the transition before attempting to close the panel.
+	--if (Controls.SlideIn:IsStopped()) then			-- Need to check to make sure that we have not already begun the transition before attempting to close the panel.
+		--UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
 		UI.PlaySound("Production_Panel_Closed");
 		Controls.SlideIn:Reverse();	
 		Controls.AlphaIn:Reverse();
 		Controls.PauseDismissWindow:Play();
 		LuaEvents.ProductionPanel_Close();
-	end
+	--end
 end
 
 -- ===========================================================================
@@ -399,6 +400,8 @@ function Open()
 		Controls.ProductionListScroll:SetScrollValue(0);
 
 		-- Size the panel to the maximum Y value of the expanded content	
+		Controls.AlphaIn:SetSpeed(1000); -- 4
+		Controls.SlideIn:SetSpeed(1000); -- 4
 		Controls.AlphaIn:SetToBeginning();
 		Controls.SlideIn:SetToBeginning();
 		Controls.AlphaIn:Play();

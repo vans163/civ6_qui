@@ -735,7 +735,7 @@ function OnTogglePurchaseTile()
 		if not Controls.ManageCitizensCheck:IsChecked() then
 			UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
 		end
-		RecenterCameraOnCity();
+		--RecenterCameraOnCity();
 		UILens.ToggleLayerOn( LensLayers.PURCHASE_PLOT );
 	else		
 		if not Controls.ManageCitizensCheck:IsChecked() then
@@ -787,7 +787,7 @@ end
 --	current state in deciding what is populate in a lens layer.
 -- ===========================================================================
 function OnToggleManageCitizens()
-	if Controls.ManageCitizensCheck:IsChecked() then			
+	if Controls.ManageCitizensCheck:IsChecked() then		
 		if not Controls.PurchaseTileCheck:IsChecked() then
 			UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
 		end
@@ -828,7 +828,6 @@ end
 --	eNewMode, new mode the engine has just changed to
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )	
-	
 	if eOldMode == InterfaceModeTypes.CITY_MANAGEMENT then
 		if Controls.PurchaseTileCheck:IsChecked()   then Controls.PurchaseTileCheck:SetAndCall( false ); end
 		if Controls.ManageCitizensCheck:IsChecked() then Controls.ManageCitizensCheck:SetAndCall( false ); end
@@ -943,6 +942,35 @@ function OnTutorial_ContextDisableItems( contextName:string, kIdsToDisable:table
 end
 
 
+function OnQuiShiftClickDown()
+	local plotId:number = UI.GetCursorPlotID();
+	local plot = Map.GetPlotByIndex(plotId);
+	if (plot == nil) then return end;
+ 	local ownerCity = Cities.GetPlotPurchaseCity(plot);
+ 	if ownerCity ~= nil then
+ 		UI.SelectCity(ownerCity, false);
+		UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
+		UILens.ToggleLayerOn( LensLayers.CITIZEN_MANAGEMENT );
+		UILens.ToggleLayerOn( LensLayers.PURCHASE_PLOT );
+		Refresh();
+		Controls.PurchaseTileCheck:SetCheck( true );
+		Controls.ManageCitizensCheck:SetCheck( true );
+		Controls.ChangeProductionCheck:SetCheck( true );
+		LuaEvents.CityPanel_ProductionOpen();
+ 	end
+end
+
+function OnQuiShiftClickUp()
+	UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);			-- Exit mode
+	UILens.ToggleLayerOff( LensLayers.CITIZEN_MANAGEMENT );
+	UILens.ToggleLayerOff( LensLayers.PURCHASE_PLOT );
+	Controls.PurchaseTileCheck:SetCheck( false );
+	Controls.ManageCitizensCheck:SetCheck( false );
+	Controls.ChangeProductionCheck:SetCheck( false );
+	LuaEvents.CityPanel_ProductionClose();
+	UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
+end
+
 -- ===========================================================================
 --	CTOR
 -- ===========================================================================
@@ -1019,5 +1047,9 @@ function Initialize()
 	TruncateStringWithTooltip(Controls.ReligionLabel,	MAX_BEFORE_TRUNC_STATIC_LABELS,	Controls.ReligionLabel:GetText());
 	TruncateStringWithTooltip(Controls.AmenitiesLabel,	MAX_BEFORE_TRUNC_STATIC_LABELS,	Controls.AmenitiesLabel:GetText());
 	TruncateStringWithTooltip(Controls.HousingLabel,	MAX_BEFORE_TRUNC_STATIC_LABELS,	Controls.HousingLabel:GetText());
+
+	LuaEvents.Qui_ShiftClick_Down.Add( OnQuiShiftClickDown );
+	LuaEvents.Qui_ShiftClick_Up.Add( OnQuiShiftClickUp );
+
 end
 Initialize();

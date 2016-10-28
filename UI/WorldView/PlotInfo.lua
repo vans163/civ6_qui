@@ -864,10 +864,8 @@ local g_ShiftDown = false;
 function KeyHandlerDown( key:number )
 	if (key == Keys.VK_SHIFT) and gShiftDown == false then
 		gShiftDown = true;
-		--ShowCitizens();
-		--ShowPurchases();
-		OnShiftPressed();
-		return true;
+		LuaEvents.Qui_ShiftClick_Down();
+		--return true;
 	end
 end
 function KeyHandlerUp( key:number )
@@ -877,31 +875,10 @@ function KeyHandlerUp( key:number )
 	end
 	if (key == Keys.VK_SHIFT) then
 		gShiftDown = false;
-		HideCitizens();
-		HidePurchases();
-		UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);			-- Exit mode		
-		UILens.ToggleLayerOff( LensLayers.CITIZEN_MANAGEMENT );
-		LuaEvents.CityPanel_ProductionClose();
-		return true;
+		LuaEvents.Qui_ShiftClick_Up();
+		--return true;
 	end
 	return false;
-end
-
-function OnShiftPressed()
-	local plotId:number = UI.GetCursorPlotID();
-	local plot = Map.GetPlotByIndex(plotId);
-	if (plot == nil) then return end;
- 	local ownerCity = Cities.GetPlotPurchaseCity(plot);
- 	if ownerCity ~= nil then
- 		UI.SelectCity(ownerCity, false);
-		UI.SetInterfaceMode(InterfaceModeTypes.CITY_MANAGEMENT);	-- Enter mode
-		UILens.ToggleLayerOn( LensLayers.CITIZEN_MANAGEMENT );
-
-		ShowCitizens2(ownerCity);
-		ShowPurchases2(ownerCity);
-		ShowYieldIcons();
-		LuaEvents.CityPanel_ProductionOpen();
- 	end
 end
 
 function OnInputHandler( pInputStruct:table )
