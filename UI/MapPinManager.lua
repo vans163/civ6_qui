@@ -198,7 +198,7 @@ end
 
 ------------------------------------------------------------------
 function OnMapPinFlagRightClick( playerID : number, pinID : number )
-	
+	--[[
 	-- If we are the owner of this pin, delete the pin.
 	if(playerID == Game.GetLocalPlayer()) then
 		local playerCfg = PlayerConfigurations[playerID];
@@ -206,7 +206,7 @@ function OnMapPinFlagRightClick( playerID : number, pinID : number )
 		Network.BroadcastPlayerInfo();
         UI.PlaySound("Map_Pin_Remove");
 	end
-	
+	--]]
 end
 
 ------------------------------------------------------------------
