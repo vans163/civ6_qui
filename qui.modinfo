@@ -29,6 +29,7 @@
 				<File>UI/MinimapPanel.xml</File>
 				<File>UI/WorldViewIconsManager.lua</File>
 				<File>UI/MapPinManager.lua</File>
+				<File>UI/ProductionPanel.xml</File>
             </Items>
         </ImportFiles>
     </Components>
@@ -50,5 +51,6 @@
 		<File>UI/MinimapPanel.xml</File>
 		<File>UI/WorldViewIconsManager.lua</File>
 		<File>UI/MapPinManager.lua</File>
+		<File>UI/ProductionPanel.xml</File>
 	</Files>
 </Mod>
