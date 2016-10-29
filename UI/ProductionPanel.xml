@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Context>
   <!-- PauseAnim - The amount of time that the list should wait before collapsing. -->
-  <SlideAnim ID="PauseCollapseList" Speed="10" Begin="-10,0" End="0,0" Cycle="Once"/>
+  <SlideAnim ID="PauseCollapseList" Speed="100" Begin="-10,0" End="0,0" Cycle="Once"/>
   <!-- PauseAnim - The amount of time that the window should wait before hiding. -->
-  <SlideAnim ID="PauseDismissWindow" Speed="5" Begin="-10,0" End="0,0" Cycle="Once"/>
+  <SlideAnim ID="PauseDismissWindow" Speed="100" Begin="-10,0" End="0,0" Cycle="Once"/>
 
-  <AlphaAnim		ID="AlphaIn"		Anchor="R,T"										Size="350,full"	AlphaBegin="0" AlphaEnd="1" Function="OutSine" Speed="3.4" Cycle="Once" >
-    <SlideAnim	ID="SlideIn"																		Size="350,full" Begin="330,0" End="0,0" Function="OutSine" Speed="3.4" Cycle="Once" >
+  <AlphaAnim		ID="AlphaIn"		Anchor="R,T"										Size="350,full"	AlphaBegin="1" AlphaEnd="1" Function="OutSine" Speed="100000" Cycle="Once" >
+    <SlideAnim	ID="SlideIn"																		Size="350,full" Begin="0,0" End="0,0" Function="OutSine" Speed="100000" Cycle="Once" >
       <!--<Grid			ID="DropShadow"	Anchor="R,T"	Offset="-50,140"	Size="450,100" Style="DropShadow"   />-->
       <Grid			ID="Window"			Anchor="R,T"	Offset="0,26"		Size="350,parent-36" Style="WindowFillHUD"  >
         <Image Texture="Controls_GradientSmall" Size="22,parent" AnchorSide="O,I" Anchor="L,T" Color="0,0,0,190" Rotate="90" Offset="-1,0"/>
@@ -158,17 +158,17 @@
             <Grid							ID="WoodenTabBacking" Style="WoodenTabBacking" Size="parent,parent"/>
             <Container				ID="TabRow" Size="parent,parent" Anchor="C,T">
               <GridButton			Hidden="1" ID="ProductionTab"  Size="115,34" Style="TabButton" String="LOC_PRODPANEL_PRODUCTION" TextOffset="0,1">
-                <AlphaAnim		ID="ProductionTabSelected" Speed="4" AlphaBegin="0" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
+                <AlphaAnim		ID="ProductionTabSelected" Speed="4" AlphaBegin="1" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
                   <GridButton  Offset="-2,0" Size="120,34" Style="TabButtonSelected" ConsumeMouseButton="0" ConsumeMouseOver="1"/>
                 </AlphaAnim>
               </GridButton>
               <GridButton			Hidden="1" ID="PurchaseTab"  Size="115,34" Style="TabButton" String="LOC_PRODPANEL_PURCHASE_GOLD" TextOffset="0,1">
-                <AlphaAnim		ID="PurchaseTabSelected" Speed="4" AlphaBegin="0" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
+                <AlphaAnim		ID="PurchaseTabSelected" Speed="4" AlphaBegin="1" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
                   <GridButton  Offset="-2,0" Size="120,34" Style="TabButtonSelected" ConsumeMouseButton="0" ConsumeMouseOver="1"/>
                 </AlphaAnim>
               </GridButton>
               <GridButton			Hidden="1" ID="PurchaseFaithTab"  Size="115,34" Style="TabButton" String="LOC_PRODPANEL_PURCHASE_FAITH" TextOffset="0,1">
-                <AlphaAnim		ID="PurchaseFaithTabSelected" Speed="4" AlphaBegin="0" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
+                <AlphaAnim		ID="PurchaseFaithTabSelected" Speed="4" AlphaBegin="1" AlphaEnd="1" Cycle="Once" Function="Root" Hidden="1" >
                   <GridButton  Offset="-2,0" Size="120,34" Style="TabButtonSelected" ConsumeMouseButton="0" ConsumeMouseOver="1"/>
                 </AlphaAnim>
               </GridButton>
@@ -178,12 +178,12 @@
               <Button  Hidden="1"   ID="MiniPurchaseFaithTab" Offset="0,8" Anchor="L,T" String="[ICON_FaithLarge]"       UseSelectedTextures="1" Size="44,44"  Texture="LaunchBar_Hook_ButtonMedium" Style="ButtonNormalText"/>
             </Container>
             <Container Anchor="C,T" Offset="0,0" Size="parent,11">
-              <SlideAnim				ID="TabAnim" Begin="0,0" End="0,0" Cycle="Once" Speed="3.5" Function="OutQuint" Size="42,11">
+              <SlideAnim				ID="TabAnim" Begin="0,0" End="0,0" Cycle="Once" Speed="100" Function="OutQuint" Size="42,11">
                 <Image					ID="TabArrow" Texture="Controls_TabSelectArrow" Size="42,11"/>
               </SlideAnim>
             </Container>
             <Container Anchor="C,B" Offset="0,4" Size="parent,36">
-              <SlideAnim			Hidden="1"	ID="MiniTabAnim" Begin="0,0" End="0,0" Cycle="Once" Speed="3.5" Function="OutQuint" Size="67,68">
+              <SlideAnim			Hidden="1"	ID="MiniTabAnim" Begin="0,0" End="0,0" Cycle="Once" Speed="100" Function="OutQuint" Size="67,68">
                 <Image				Hidden="1"	ID="MiniTabArrow" Texture="LaunchBar_HookSelectArrow_Medium2" Size="67,68"/>
               </SlideAnim>
             </Container>
@@ -212,8 +212,8 @@
     <Stack					ID="Top" StackGrowth="Down" >
       <GridButton		ID="Header" Style="ButtonExpand" String="Districts" Size="325,41"/>
       <GridButton		ID="HeaderOn" Style="ButtonExpandSelected" String="Districts" Size="325,41" Hidden="1"/>
-      <SlideAnim		ID="ListSlide" Speed="3.5" Begin="0,-10" End="0,0" Cycle="Once" Size="400,0" AutoSize="V">
-        <AlphaAnim  ID="ListAlpha" Speed="4" AlphaBegin="0" AlphaEnd="1" Cycle="Once" AutoSize="V">
+      <SlideAnim		ID="ListSlide" Speed="100" Begin="0,-10" End="0,0" Cycle="Once" Size="400,0" AutoSize="V">
+        <AlphaAnim  ID="ListAlpha" Speed="4" AlphaBegin="1" AlphaEnd="1" Cycle="Once" AutoSize="V">
           <Stack		ID="List" StackGrowth="Down"  Offset="5,0" Padding="2"/>
         </AlphaAnim>
       </SlideAnim>
