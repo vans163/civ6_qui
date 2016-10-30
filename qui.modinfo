@@ -5,6 +5,7 @@
 		<Teaser>LOC_AZTEC_MONTEZUMA_MOD_TEASER</Teaser>
 		<Description>Reduce clicks and make empire management easy</Description>
 		<Authors>vans163</Authors>
+		<Contributors>vans163, olegbl</Contributors>
 		<ShowInBrowser>AlwaysHidden</ShowInBrowser>
 		<EnabledByDefault>1</EnabledByDefault>
 		<EnabledAtStartup>1</EnabledAtStartup>
