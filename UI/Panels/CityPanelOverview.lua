@@ -390,7 +390,7 @@ end
 
 -- ===========================================================================
 function ViewPanelAmenities( data:table )	
-	Controls.AmenitiesAdvisorBubble:SetHide( false );
+	Controls.AmenitiesAdvisorBubble:SetHide( true );
 
 	-- new ameneties section
 	Controls.AmenityStack:SetHide( true );
@@ -579,6 +579,7 @@ function ViewPanelHousing( data:table )
 	Controls.HousingStatus:SetTextureOffsetVal( UV_HOUSING_GROWTH_STATUS[uv].u, UV_HOUSING_GROWTH_STATUS[uv].v );
 	Controls.HousingStatusIcon:SetColorByName( colorName );
 
+	Controls.HousingAdvisorBubble:SetHide(true);
 	Controls.HousingAdvice:SetText(data.HousingAdvice);
 
 	m_kHousingIM:ResetInstances();
