@@ -1,5 +1,10 @@
 # Civilization 6 - Quick UI
 
+### FUTURE USAGE November 7, 2016
+
+Please check out and use chaorace fork https://github.com/chaorace/cqui  
+It is much more mature and receives updates regularly  
+
 ### How to use
 Find your DLC folder, usually on Windows it is:  
 ```
