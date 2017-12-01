@@ -3,7 +3,7 @@
 
 # Civilization 6 - Chao's Quick UI
 
-## CQUI no longer lives on this repo! Please see the [CQUI - Community Edition Repo](https://github.com/Azurency/cqui) to get the latest CQUI updates and support. @Azurency has proven to be an excellent steward of the project and I wholeheartedly endorse him!
+## CQUI no longer lives on this repo! Please see the [CQUI - Community Edition Repo](https://github.com/Azurency/CQUI_Community-Edition) to get the latest CQUI updates and support. @Azurency has proven to be an excellent steward of the project and I wholeheartedly endorse him!
 ## I'd like to take this opportunity to give one last big shoutout to the brilliant contributors and translators who helped make this mod happen. I'm so lucky to have had an opportunity to code alongside so many talented people. (:
 
 # Features:
