@@ -1,10 +1,10 @@
 
-[![Gitter IRC URL](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/Civ6-CQUI/Help)
 [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/realchaorace)
 
 # Civilization 6 - Chao's Quick UI
 
-## The below featurelist and screenshots are outdated! Expect this page to get updated with the next release
+## CQUI no longer lives on this repo! Please see the [CQUI - Community Edition Repo](https://github.com/Azurency/cqui) to get the latest CQUI updates and support. @Azurency has proven to be an excellent steward of the project and I wholeheartedly endorse him!
+## I'd like to take this opportunity to give one last big shoutout to the brilliant contributors and translators who helped make this mod happen. I'm so lucky to have had an opportunity to code alongside so many talented people. (:
 
 # Features:
 
